@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 class HomeController extends Controller{
     /**
      * This method is invoked when '/' route is selected
-     * @return view relative view to this method. 
+     * @return view redirect to catalog's view
      */
     public function getHome(){
-        return view ("home");
+        return redirect()->action([CatalogController::class, 'getIndex']);
     }
 }
