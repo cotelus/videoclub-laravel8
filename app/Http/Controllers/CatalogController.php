@@ -184,7 +184,7 @@ class CatalogController extends Controller{
      * @return view relative view to this method. 
      */
     public function getShow($id){
-        return view('catalog.show', array('id'=>$id));
+        return view('catalog.show', array('id'=>$id, 'movie'=>$this->movies[$id]));
     }
 
     /**
