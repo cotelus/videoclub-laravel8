@@ -1,7 +1,7 @@
 <?php
 
 # En Laravel 8 la forma de llamar a los controladores cambia, hay que incluir la ruta del controlador con use
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-# RUTAS EJERCICIOS
-Route::get('/', function () {
-    return view("home", array('nombre'=>"Juan"));
-});
+// Home route
+Route::get('/' , [HomeController::class, 'getHome']);
 
 Route::get('/login', function () {
     return view("auth.login");
@@ -28,31 +26,22 @@ Route::get('/logout', function () {
     return 'Logout usuario';
 });
 
-/*
-Route::get('/catalog', function () {
-    return view("catalog.index");
-});
-
-Route::get('/catalog/show/{id}', function ($id) {
-    return view('catalog.show', array('id'=>$id));
-});
-
-Route::get('/catalog/create', function () {
-    return view("catalog.create");
-});
-
-Route::get('/catalog/edit/{id}', function ($id) {
-    return view("catalog.edit", array('id'=>$id));
-});
-*/
-// Grupo de rutas con un prefijo
+// Route group with catalog prefix
 Route::group(['prefix' => 'catalog'], function () {
+    // Catalog's index route
     Route::get('/', function () { 
         return view("catalog.index");
-     });
+    });
+    // Detail view of specific item in movies catalog
+    Route::get('show/{id}', function ($id) {
+        return view('catalog.show', array('id'=>$id));
+    });
+    // Form to upload a new item. Add a new movie to catalog
     Route::get('create', function () { 
         return view("catalog.create");
-     });
+    });
+    // Form to edit an existing item in movies catalog
+    Route::get('edit/{id}', function ($id) {
+        return view("catalog.edit", array('id'=>$id));
+    });
 });
-
-//Route::get('user/{id}', [UserController::class, 'showProfile']);
