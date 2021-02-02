@@ -1,7 +1,9 @@
 <?php
 
-# En Laravel 8 la forma de llamar a los controladores cambia, hay que incluir la ruta del controlador con use
+// use to add controllers route
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CatalogController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,19 +31,14 @@ Route::get('/logout', function () {
 // Route group with catalog prefix
 Route::group(['prefix' => 'catalog'], function () {
     // Catalog's index route
-    Route::get('/', function () { 
-        return view("catalog.index");
-    });
+    Route::get('/', [CatalogController::class, 'getIndex']);
+
     // Detail view of specific item in movies catalog
-    Route::get('show/{id}', function ($id) {
-        return view('catalog.show', array('id'=>$id));
-    });
+    Route::get('show/{id}', [CatalogController::class, 'getShow']);
+
     // Form to upload a new item. Add a new movie to catalog
-    Route::get('create', function () { 
-        return view("catalog.create");
-    });
+    Route::get('create', [CatalogController::class, 'getCreate']);
+
     // Form to edit an existing item in movies catalog
-    Route::get('edit/{id}', function ($id) {
-        return view("catalog.edit", array('id'=>$id));
-    });
+    Route::get('edit/{id}', [CatalogController::class, 'getEdit']);
 });
