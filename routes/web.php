@@ -1,5 +1,7 @@
 <?php
 
+# En Laravel 8 la forma de llamar a los controladores cambia, hay que incluir la ruta del controlador con use
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,7 @@ Route::get('/logout', function () {
     return 'Logout usuario';
 });
 
+/*
 Route::get('/catalog', function () {
     return view("catalog.index");
 });
@@ -41,3 +44,15 @@ Route::get('/catalog/create', function () {
 Route::get('/catalog/edit/{id}', function ($id) {
     return view("catalog.edit", array('id'=>$id));
 });
+*/
+// Grupo de rutas con un prefijo
+Route::group(['prefix' => 'catalog'], function () {
+    Route::get('/', function () { 
+        return view("catalog.index");
+     });
+    Route::get('create', function () { 
+        return view("catalog.create");
+     });
+});
+
+//Route::get('user/{id}', [UserController::class, 'showProfile']);
