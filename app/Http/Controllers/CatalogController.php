@@ -17,7 +17,6 @@ class CatalogController extends Controller{
         $movies = Movie::all();
 
         return view("catalog.index", array('movies'=>$movies));
-
     }
 
     /**
@@ -27,9 +26,7 @@ class CatalogController extends Controller{
      * @return view relative view to this method. 
      */
     public function getShow($id){
-        // Database id start on 1, but array index start on 0. 
-        // That's the reason why Movie::find($id + 1 )
-        $movie = Movie::findOrFail($id + 1);
+        $movie = Movie::findOrFail($id);
 
         return view('catalog.show', array('id'=>$id, 'movie'=>$movie));
     }
@@ -50,9 +47,7 @@ class CatalogController extends Controller{
      * @return view relative view to this method. 
      */
     public function getEdit($id){
-        // Database id start on 1, but array index start on 0. 
-        // That's the reason why Movie::find($id + 1 )
-        $movie = Movie::findOrFail($id + 1);
+        $movie = Movie::findOrFail($id);
 
         return view('catalog.edit', array('id'=>$id, 'movie'=>$movie));
     }

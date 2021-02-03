@@ -1,10 +1,10 @@
 <?php
 
 namespace Database\Seeders;
-// Must declare DB class to use it
-use DB;
 use Illuminate\Database\Seeder;
 
+// Must declare DB class to use it
+use DB;
 // Needed to use movies model
 use App\Models\Movie;
 
