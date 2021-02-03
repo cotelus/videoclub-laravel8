@@ -29,13 +29,14 @@ class CatalogController extends Controller{
     public function getShow($id){
         // Database id start on 1, but array index start on 0. 
         // That's the reason why Movie::find($id + 1 )
-        $movie = Movie::find($id + 1);
+        $movie = Movie::findOrFail($id + 1);
 
         return view('catalog.show', array('id'=>$id, 'movie'=>$movie));
     }
 
     /**
-     * This method is invoked when 'catalog/create' route is selected
+     * This method is invoked when 'catalog/create' route is selected.
+     * 
      * @return view relative view to this method. 
      */
     public function getCreate(){
@@ -43,10 +44,16 @@ class CatalogController extends Controller{
     }
 
     /**
-     * This method is invoked when 'catalog/edit/{id}' route is selected
+     * This method is invoked when 'catalog/edit/{id}' route is selected. It calls movies model to get
+     * a specific id
+     * 
      * @return view relative view to this method. 
      */
     public function getEdit($id){
-        return view("catalog.edit", array('id'=>$id));
+        // Database id start on 1, but array index start on 0. 
+        // That's the reason why Movie::find($id + 1 )
+        $movie = Movie::findOrFail($id + 1);
+
+        return view('catalog.edit', array('id'=>$id, 'movie'=>$movie));
     }
 }

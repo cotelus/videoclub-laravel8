@@ -12,7 +12,7 @@
                 <form action="" method="POST">
                     {{-- Include CSRF protection token AND PUT method using laravel instead default POST --}}
                     @csrf
-                    @method('PUT');
+                    @method('PUT')
 
                     <div class="form-group">
                         <label for="title">Título</label>
