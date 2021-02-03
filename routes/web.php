@@ -42,3 +42,6 @@ Route::group(['prefix' => 'catalog'], function () {
     // Form to edit an existing item in movies catalog
     Route::get('edit/{id}', [CatalogController::class, 'getEdit']);
 });
+
+// Adminer route to admin DDBB
+Route::any('adminer', '\Aranyasen\LaravelAdminer\AdminerController@index');
