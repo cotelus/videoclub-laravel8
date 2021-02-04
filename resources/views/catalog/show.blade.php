@@ -27,7 +27,7 @@
 
             <div class="row col-sm-12">
                 <button type="button" class="btn btn-danger">Devolver película</button>
-                <button type="button" onclick="{{url("/catalog/edit/$movie->id")}}" class="btn ml-1 btn-warning text-light">Editar película</button>
+                <button type="button" onclick="window.location.href='{{url("/catalog/edit/$movie->id")}}';" class="btn ml-1 btn-warning text-light">Editar película</button>
                 <button type="button" class="btn ml-1 btn-outline-dark">Volver al listado</button>
             </div>
 
