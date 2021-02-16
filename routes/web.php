@@ -31,7 +31,7 @@ Route::get('/logout', function () {
 */
 
 // Route group with catalog prefix
-Route::group(['prefix' => 'catalog'], function () {
+Route::group(['prefix' => 'catalog', 'middleware' => 'auth'], function () {
     // Catalog's index route
     Route::get('/', [CatalogController::class, 'getIndex']);
 
@@ -49,11 +49,5 @@ Route::group(['prefix' => 'catalog'], function () {
 Route::any('adminer', '\Aranyasen\LaravelAdminer\AdminerController@index');
 Auth::routes();
 
-// Middleware to prevent users going forward without been identified
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('catalog',        'CatalogController@getIndex');
-    Route::get('catalog/create', 'CatalogController@getCreate');
-    // ...
-});
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
