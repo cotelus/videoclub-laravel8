@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 // Home route
 Route::get('/' , [HomeController::class, 'getHome']);
 
+/*
 Route::get('/login', function () {
     return view("auth.login");
 });
@@ -27,6 +28,7 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return 'Logout usuario';
 });
+*/
 
 // Route group with catalog prefix
 Route::group(['prefix' => 'catalog'], function () {
@@ -47,4 +49,11 @@ Route::group(['prefix' => 'catalog'], function () {
 Route::any('adminer', '\Aranyasen\LaravelAdminer\AdminerController@index');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Middleware to prevent users going forward without been identified
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('catalog',        'CatalogController@getIndex');
+    Route::get('catalog/create', 'CatalogController@getCreate');
+    // ...
+});
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
