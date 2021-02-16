@@ -5,8 +5,9 @@ use Illuminate\Database\Seeder;
 
 // Must declare DB class to use it
 use DB;
-// Needed to use movies model
+// Needed to use movies and users model
 use App\Models\Movie;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder{
     /**
@@ -185,6 +186,9 @@ class DatabaseSeeder extends Seeder{
         // \App\Models\User::factory(10)->create();
         self::seedCatalog();
         $this->command->info('Tabla catálogo inicializada con los datos!');
+
+		self::seedUsers();
+		$this->command->info('Tabla usuarios inicializada con datos');
     }
 
     /**
@@ -207,5 +211,29 @@ class DatabaseSeeder extends Seeder{
             $p->save();
         }
 
+    }
+
+	/**
+     * Initialice database table "users" with two test users.
+	 * 
+	 * By now this is a test, but email_verified_at must be filled
+     * 
+     * @return void
+     */
+    private function seedUsers(){
+        // Delete database table "movies"
+        DB::table('users')->delete();
+
+		$user = new User;
+		$user->name = "Fulanito";
+		$user->email = "fulanito19@videoclub.test";
+		$user->password = bcrypt("123456");
+		$user->save();
+
+		$user2 = new User;
+		$user2->name = "Menganito";
+		$user2->email = "vivamengano@videoclub.test";
+		$user2->password = bcrypt("123456");
+		$user2->save();
     }
 }

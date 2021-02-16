@@ -45,3 +45,6 @@ Route::group(['prefix' => 'catalog'], function () {
 
 // Adminer route to admin DDBB
 Route::any('adminer', '\Aranyasen\LaravelAdminer\AdminerController@index');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
